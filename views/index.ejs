@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="home">
+  <div class="flex-container">
+  <div class="background">
+    <h1 class="title"><%= title %></h1>
+    <p class="welcome">Welcome to <%= title %></p>
+  <form action="/" method="POST" class="form">
+    <label for="email" >Email :</label>
+    <input type="email" id="email" placeholder="Email" autocomplete="on" name="email">
+    <br>
+    <label for="password">Password :</label>
+    <input type="password" id="password" placeholder="Password" autocomplete="on" name="password">
+    <br>
+    <button type="submit" class="button">Submit</button>
+  </form>
+  <a href="/signup">Signup</a>
+  </div>
+  </div>
+  </body>
+</html>

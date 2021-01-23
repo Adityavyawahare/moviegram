@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <table>
+      <tr>
+        <th>User id</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Created Date</th>
+      </tr>
+      <%for(var i=0;i<count;i++){ %>
+      <tr >
+        <td ><%=data[i].id%></td>
+        <td ><%=data[i].email%></td>
+        <td ><%= data[i].password%></td>
+        <td ><%=data[i].created_at%></td>
+      </tr>
+      <%} %>
+    </table>
+  </body>
+</html>

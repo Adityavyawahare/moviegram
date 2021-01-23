@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      function myfunc(x) {
+        document.getElementById("like_button"+x).disabled = true;
+        $(document).ready(function () {
+            $(this).prop('disabled', true);
+            $.post("/add_like", {
+                      comment_id: x
+                    },
+                    function (data,status) {
+                      $("#gg"+x.toString()).text(data-1);
+                    });
+          });
+        }
+      function myfunc2(x) {
+        $(document).ready(function () {
+          $.post("/order_by", {
+                    value: x
+                  },function(html){
+            $("#comments_sec").html(html);
+          });
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  <img src="<%=movie_data[0].image_url%>" class="img-rounded">
+  <p><strong><%=movie_data[0].name%><div align="right">IMDB :<%=movie_data[0].imdb%></div></strong></p>
+  <p><%=movie_data[0].description%></p>
+    <h1 align="center"><%=average%></h1>
+    <p align="center">Rated by Users</p>
+  <form action="/movies/<%=movie_data[0].name%>" method="post">
+    <label>
+      <input type="number" placeholder="rate here.." name="input_rating" step="0.1">
+    <input type="text" placeholder="comment here.." name="input_comment">
+      <button type="submit">comment</button>
+    </label>
+  </form>
+    <br>
+    <label for="order_by">Order by:</label>
+
+    <select name="order_by" id="drop" onchange="myfunc2(value)" >
+      <option value='created_at'>Newest First</option>
+      <option value='likes'>Top Comment</option>
+    </select>
+    <div id="comments_sec">
+  <%for(var i=0;i<comment.length;i++){%>
+      <div align="left" class="comment_section">
+        <div style="display: none" id="comment_id"><%=comment[i].id%></div>
+        Rated :<%=comment[i].rating%><br>
+        <%=comment[i].name%>:
+        <%=comment[i].comment_text%>
+        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes-1%></div>
+      </div>
+  <%}%>
+    </div>
+  </body>
+</html>
