@@ -2,7 +2,8 @@ var connect=require('./index')
 
 var crud= {
     insert: function (data) {
-        connect.conn.connect.query('INSERT INTO movies(name,description,imdb,created_at) VALUES?', data, function (err, result) {
+        connect.conn.connect.query("INSERT INTO movies(id,name,imdb,time) VALUES ?",data, function (err, result) {
+            //console.log('INSERT INTO movies(id,name,imdb,time) VALUES ?',data)
             if (err) throw err;
             console.log("movie inserted successfully...");
         });
@@ -16,6 +17,7 @@ var crud= {
     },
     display: function (callback) {
         connect.conn.connect.query('SELECT * FROM movies', function (err, result) {
+
             if (err) throw err;
             return callback(result);
         });
@@ -90,6 +92,14 @@ var crud= {
         connect.conn.connect.query("SELECT AVG(rating) as average from ratings where movie_id=?", data, function (err, result) {
             if (err) throw err;
             callback(result[0].average.toFixed(2));
+        });
+    },
+    find_if:function(data,callback){
+        var result=0;
+        connect.conn.connect.query("SELECT name FROM movies WHERE id=?", data, function (err, result) {
+            if (err) throw err;
+            if(result===undefined){callback(0);}
+            else{callback(1)};
         });
     }
 }

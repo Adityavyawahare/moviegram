@@ -2,12 +2,21 @@ var connect=require('../models/index')
 //to create users Table
 exports.movies={
     create: function(){
+<<<<<<< HEAD
         connect.conn.connect.query('create table movies(\n' +
             '  id INT AUTO_INCREMENT PRIMARY KEY,\n' +
             '  name VARCHAR(255) NOT NULL,\n' +
             '  description VARCHAR(255),\n' +
             '  imdb DECIMAL(2,1) NOT NULL,\n' +
             '  created_at TIMESTAMP DEFAULT NOW()\n' +
+=======
+        connect.conn.connect.query('create table movies(\n'+
+            'id VARCHAR(15) PRIMARY KEY,\n'+
+            'name VARCHAR(300) NOT NULL,\n'+
+            'imdb DECIMAL(2,1) NOT NULL,\n'+
+            'time VARCHAR(20) NOT NULL,\n'+
+            'created_at TIMESTAMP DEFAULT NOW()\n'+
+>>>>>>> c1a895f (omdb api based moviegram)
             ');',function (err,result) {
             if (err) throw err;
             console.log("Movies table was created...");

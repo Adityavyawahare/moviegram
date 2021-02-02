@@ -11,6 +11,6 @@ router.post('/movies',form.movies_post);
 router.post('/search',form.search_bar);
 router.post('/add_like',form.add_like);
 router.post('/order_by',form.order_by);
-router.get('/movies/:movie_name',form.show_movie);
-router.post('/movies/:movie_name',form.get_comment);
+router.get('/movies/:movie_id',form.show_movie);
+router.post('/movies/:movie_id',form.get_comment);
 module.exports = router;

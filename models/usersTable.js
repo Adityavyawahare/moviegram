@@ -4,7 +4,7 @@ var connect=require('./index')
 var crud={
     insert: function(data){
         connect.conn.connect.query('INSERT INTO users(name,number,email,password,created_at) VALUES?',data,function (err,result) {
-        if (err) throw err;
+            if (err) throw err;
             console.log("users inserted successfully...");
     });
     },
