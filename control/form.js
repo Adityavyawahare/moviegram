@@ -110,9 +110,10 @@ exports.signup_post=function(req, res, next) {
 exports.movies_get=function(req,res,next){
     movies.display_movies_and_images(function(value)
     {
-        genres.get_filter((genre)=>{
-            res.render('movies', {title: 'Moviegram',movies:value,filter:genre});
-        })
+
+        //genres.get_filter((genre)=>{
+            res.render('movies', {title: 'Moviegram',movies:value});
+        //})
     });
 }
 exports.movies_post=function(req,res,next){
