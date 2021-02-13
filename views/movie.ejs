@@ -16,7 +16,7 @@
                       comment_id: x
                     },
                     function (data,status) {
-                      $("#gg"+x.toString()).text(data-1);
+                      $("#gg"+x.toString()).text(data);
                     });
           });
         }
@@ -29,17 +29,19 @@
           });
         })
       }
+      
     </script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  <img src="<%=movie_data[0].image_url%>" class="img-rounded">
-  <p><strong><%=movie_data[0].name%><div align="right">IMDB :<%=movie_data[0].imdb%></div></strong></p>
-  <p><%=movie_data[0].description%></p>
+  <img src="<%=movie_data.Poster%>" class="img-rounded">
+  <p><strong><%=movie_data.Title%>(<%=movie_data.Year%>)<div align="right">IMDB :<%=movie_data.imdbRating%></div></strong></p>
+  <p>Rated :<%=movie_data.Rating%></p>
+  <p><%=movie_data.Plot%></p>
     <h1 align="center"><%=average%></h1>
     <p align="center">Rated by Users</p>
-  <form action="/movies/<%=movie_data[0].name%>" method="post">
+  <form action="/movies/<%=movie_data.imdbID%>" method="post">
     <label>
       <input type="number" placeholder="rate here.." name="input_rating" step="0.1">
     <input type="text" placeholder="comment here.." name="input_comment">
@@ -60,7 +62,7 @@
         Rated :<%=comment[i].rating%><br>
         <%=comment[i].name%>:
         <%=comment[i].comment_text%>
-        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes-1%></div>
+        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
       </div>
   <%}%>
     </div>

@@ -47,8 +47,11 @@ var crud={
         });
     })
     },
-    get_filter:function(){
-        
+    get_filter:function(callback){
+        connect.conn.connect.query("SELECT id as id,genre_text as text FROM genre_list",function (err,result) {
+            if (err) throw err;
+            callback(result);
+        });
     }
 }
 module.exports=crud;

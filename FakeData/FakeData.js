@@ -24,13 +24,13 @@ exports.insertIn={
                 faker.date.past()
             ])
         }
-        // data.push([
-        //     'Aditya Vyawahare',
-        //     '8669660468',
-        //     'Aditya@gmail.com',
-        //     'adiv',
-        //     faker.date.past()
-        // ])
+        data.push([
+            'Aditya Vyawahare',
+            '8669660468',
+            'Aditya@gmail.com',
+            'adiv',
+            faker.date.past()
+        ])
         users.insert([data]);
     },
     movies: async function() {
@@ -316,7 +316,7 @@ exports.insertIn={
                 arr[faker.random.number({'min':0,'max':39})],
                 faker.date.past()
             ])}
-        comments.insert([data]);
+        comments.insert([data],()=>{});
     },
     genre:async function(){
         // var data=[];

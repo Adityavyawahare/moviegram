@@ -111,9 +111,9 @@ exports.movies_get=function(req,res,next){
     movies.display_movies_and_images(function(value)
     {
 
-        //genres.get_filter((genre)=>{
-            res.render('movies', {title: 'Moviegram',movies:value});
-        //})
+        genres.get_filter((genre)=>{
+            res.render('movies', {title: 'Moviegram',movies:value,genres_data:genre});
+        })
     });
 }
 exports.movies_post=function(req,res,next){
@@ -124,124 +124,168 @@ exports.movies_post=function(req,res,next){
     };
     console.log(data);
     movies.find_filter(data,function(result){
-        res.render('movies',{title:'Moviegram',movies:result});
+        genres.get_filter((genre)=>{
+            res.render('movies',{title:'Moviegram',movies:result,genres_data:genre});
+        })
     });
 }
-exports.search_bar=function(req,res,next){
-    var uni = unirest("GET", "http://www.omdbapi.com/?");
-
-    uni.query({
-    "s": req.body.search,
-    "apikey":'9b728400'
-    });
-
-    uni.end(function (data) {
-    if (data.error) 
-    {
-        res.redirect('/movies');
-        throw new Error(data.error);
+exports.search_bar=async function(req,res,next){
+    async function auth() {
+        var uni = unirest("GET", "http://www.omdbapi.com/?");
+        const val= await uni.query({
+            "s": req.body.search,
+            "apikey":'9b728400'
+            })
+            .then((val) => {
+                if (val.error) 
+                {
+                    res.redirect('/movies');
+                    throw new Error(data.error);
+                }
+                if (val===undefined) 
+                {
+                    res.redirect('/movies');
+                }
+                return new Promise((response,reject)=>{
+                    response(val);
+                })
+              });
+        return val;
+    }
+    async function auth2(i) {
+        var uni = unirest("GET", "http://www.omdbapi.com/?");
+        const val= await uni.query({
+            "i":i,
+            "apikey":'9b728400'
+            })
+            .then((val) => {
+                if (val.error) 
+                {
+                    res.redirect('/movies');
+                    throw new Error(data.error);
+                }
+                return new Promise((response,reject)=>{
+                    response(val);
+                })
+              });
+        return val;
     }
     var val=[];
-    for(var i=0;i<20;i++)
-    {
-        var rating;
-        var rr = unirest("GET", "http://www.omdbapi.com/?");
-        rr.query({
-        "i":data.body.Search[0].imdbID,
-        "apikey":'9b728400'
-        })
-        rr.end(function(lol){
-        if (lol.error) {
-            res.redirect('/movies');
-            throw new Error(lol.error);
-        }
-            rating=parseFloat(lol.body.imdbRating);
-        })
-        var x={
-            name: data.body.Search[i].Title,
-            image_url:data.body.Search[i].Poster,
-            imdb: rating
-        }
-        val.push(x);
-    }
-    res.render('movies',{title:'Moviegram',movies:val});
-    });
-}
-exports.show_movie=function(req,res,next){
-    var com;
-    movies.find_if(req.params.movie_id,function(gg){
-        var uni = unirest("GET", "http://www.omdbapi.com/?");
-
-        uni.query({
-        "i": req.params.movie_id,
-        "plot":"full",
-        "apikey":'9b728400'
-        });
-    
-        uni.end(function (data) {
+    await auth().then(async function (data) {
         if (data.error) 
         {
-            res.redirect('/movies');
             throw new Error(data.error);
         }
-        if(gg==0)
-        {   
-            var data_movies=[];
-            data_movies.push([
-                req.params.movie_id,
-                data.body.Title,
-                parseFloat(data.body.imdbRating),
-                data.body.Runtime
-            ])
-            movies.insert([data_movies])
-
-            var data_image=[];
-            data_image.push([
-                data.body.Poster,
-                req.params.movie_id
-            ])
-            photos.insert([data_image]);
-
-            var s=data.body.Genre;
-            var arr=s.split(",");
-            for(var i=0;i<arr.length;i++)
-            {
-                genres.find(arr[i],function(d){
-                    if(d==-1)
-                    {
-                        genres.insert_genre([[arr[i]]])
-                        genres.find(arr[i],function(c){
-                            var a=[]
-                            a.push([req.params.movie_id,
-                                c
-                            ])
-                            genres.insert_genre_link(a);
-                        })  
-                    }
-                    else{
-                        var a=[]
-                            a.push([req.params.movie_id,
-                                d
-                            ])
-                            genres.insert_genre_link(a);
-                    }
-                })
-            }
+        var x=data.body.Search.length
+        if(x>20){
+            x=20
         }
-            cur_movie_name=data.body.Title;
-            cur_movie_id=req.params.movie_id;
-            comments.display(cur_movie_id,function (result) {
-                com=result;
-                movies.average_rating(cur_movie_id,function (avg) {
-                    res.render('movie',{title:'Moviegram',movie_data:data.body,comment:com,average:avg})
-                });
+        for(var i=0;i<x;i++)
+        {
+            await auth2(data.body.Search[i].imdbID).then(async function(lol){
+                rating=parseFloat(lol.body.imdbRating);
+                var x={
+                    name: data.body.Search[i].Title,
+                    image_url:data.body.Search[i].Poster,
+                    imdb: rating,
+                    id: data.body.Search[i].imdbID
+                }
+                console.log(x);
+                val.push(x);  
             })
-        })
+        }    
+    });
+    genres.get_filter((genre)=>{
+        res.render('movies',{title:'Moviegram',movies:val,genres_data:genre});
+    })
+}
+exports.show_movie=async function(req,res,next){
+    var com;
+    movies.find_if(req.params.movie_id,async function(gg){
+        async function auth() {
+            var uni = unirest("GET", "http://www.omdbapi.com/?");
+            const val= await uni.query({
+                "i": req.params.movie_id,
+                "plot":"full",
+                "apikey":'9b728400'
+                })
+                .then((val) => {
+                    return new Promise((response,reject)=>{
+                        if (val.error) 
+                        {
+                            res.redirect('/movies');
+                            throw new Error(val.error);
+                        }
+                        response(val);
+                    })
+                  });
+            return val;
+        }
+        await auth().then(async function (data) {
+            console.log(gg);
+            if(gg==0)
+            {   
+                var data_movies=[];
+                data_movies.push([
+                    req.params.movie_id,
+                    data.body.Title,
+                    parseFloat(data.body.imdbRating),
+                    data.body.Runtime
+                ])
+                await movies.insert([data_movies])
+
+                var data_image=[];
+                data_image.push([
+                    data.body.Poster,
+                    req.params.movie_id
+                ])
+                await photos.insert([data_image]);
+
+                var s=data.body.Genre;
+                var arr=s.split(",");
+
+                for (let j=0;j<arr.length;j++)
+                {
+                    let x=arr[j];
+                    x=x.trim();
+                    var d=await genres.find(x)
+                    if(d==-1)
+                        {
+                            await genres.insert_genre([[[x]]])
+                                const c= await genres.find(x)
+                                let a=[]
+                                a.push([req.params.movie_id,
+                                    c
+                                    ])
+                                await genres.insert_genre_link([a]);                            
+                            }  
+                        else{
+                            let a=[]
+                                a.push([req.params.movie_id,
+                                    d
+                                ]);
+                                await genres.insert_genre_link([a]);
+                        }
+                }
+            }
+                cur_movie_name=data.body.Title;
+                cur_movie_id=req.params.movie_id;
+                comments.display(cur_movie_id,function (result) {
+                    com=result;
+                    movies.average_rating(cur_movie_id,function (avg) {
+                        res.render('movie',{title:'Moviegram',movie_data:data.body,comment:com,average:avg})
+                    });
+                })
+            })
     });
 }
 exports.get_comment=function (req,res,next) {
     var data= [];
     var cur_comment_id;
+    // if(user_id===undefined)
+    // {
+    //     res.redirect('/');
+    // }
     data.push([
         req.body.input_comment,
         user_id,
@@ -249,22 +293,24 @@ exports.get_comment=function (req,res,next) {
         new Date().toISOString().slice(0, 19).replace('T', ' ')
     ])
     console.log(new Date().toISOString().slice(0, 19).replace('T', ' '));
+    console.log([data]);
     var rate=[];
-    comments.insert([data]);
-    comments.get_id({user_id:user_id,movie_id:cur_movie_id},function(x){
-        cur_comment_id=x;
-        rate.push([
-            user_id,
-            cur_movie_id,
-            cur_comment_id,
-            parseFloat(req.body.input_rating)
-        ])
-        ratings.insert([rate],function () {
-            res.redirect('/movies/' + req.params.movie_name);
-        });
-    })
+    comments.insert([data],()=>{
+        comments.get_id({user_id:user_id,movie_id:cur_movie_id},function(x){
+            cur_comment_id=x;
+            rate.push([
+                user_id,
+                cur_movie_id,
+                cur_comment_id,
+                parseFloat(req.body.input_rating)
+            ]);
+            console.log([rate]);
+            ratings.insert([rate],function () {
+                res.redirect('/movies/' + req.params.movie_id);
+            });
+        })
+    });
 }
-
 exports.add_like=function(req,res,next){
     var data=[];
     var val=0;

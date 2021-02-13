@@ -2,10 +2,13 @@ var connect=require('./index')
 
 var crud={
     insert: function(data){
+        return new Promise(function(resolve, reject) {
         connect.conn.connect.query('INSERT INTO photos(image_url,movie_id) VALUES?',data,function (err,result) {
             if (err) throw err;
             console.log("photos inserted successfully...");
         });
+        resolve();
+    })
     },
     count: function(callback) {
         connect.conn.connect.query("SELECT COUNT(*) AS count FROM photos ", function (err, result) {
