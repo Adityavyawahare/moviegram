@@ -8,7 +8,7 @@ var crud={
         });
     },
     count: function(data,callback) {
-        connect.conn.connect.query("SELECT COUNT(*) AS count FROM likes where comment_id="+data+" group by comment_id;", function (err, result) {
+        connect.conn.connect.query("SELECT COUNT(*) AS count FROM likes where comment_id="+data+";", function (err, result) {
             console.log("Counted successfully" + result[0].count);
             if (err) throw err;
             callback(result[0].count);

@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
       function myfunc(x) {
@@ -16,7 +21,7 @@
                       comment_id: x
                     },
                     function (data,status) {
-                      $("#gg"+x.toString()).text(data-1);
+                      $("#gg"+x.toString()).text(data);
                     });
           });
         }
@@ -29,21 +34,41 @@
           });
         })
       }
+      $(() => {
+  const $form = $('#comment_inserted')
+
+  $form.on('submit', myfunc3)
+
+  function myfunc3 (e) {
+    e.preventDefault()
+    const options = {
+      method: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize()
+    }
+
+    $.ajax(options).done(html => {
+      $("#average_sec").html(html);
+    })
+    }
+  })    
     </script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  <img src="<%=movie_data[0].image_url%>" class="img-rounded">
-  <p><strong><%=movie_data[0].name%><div align="right">IMDB :<%=movie_data[0].imdb%></div></strong></p>
-  <p><%=movie_data[0].description%></p>
+  <img src="<%=movie_data.Poster%>" class="img-rounded">
+  <p><strong><%=movie_data.Title%>(<%=movie_data.Year%>)<div align="right">IMDB :<%=movie_data.imdbRating%></div></strong></p>
+  <p>Rated :<%=movie_data.Rating%></p>
+  <p><%=movie_data.Plot%></p>
+  <div id="average_sec">
     <h1 align="center"><%=average%></h1>
     <p align="center">Rated by Users</p>
-  <form action="/movies/<%=movie_data[0].name%>" method="post">
+  <form action="/get_comment" method="post" id="comment_inserted">
     <label>
-      <input type="number" placeholder="rate here.." name="input_rating" step="0.1">
-    <input type="text" placeholder="comment here.." name="input_comment">
-      <button type="submit">comment</button>
+      <input type="number" placeholder="rate here.." name="input_rating" step="0.1" required>
+    <input type="text" placeholder="comment here.." name="input_comment" required>
+      <button type="submit" value="submit">comment</button>
     </label>
   </form>
     <br>
@@ -60,9 +85,10 @@
         Rated :<%=comment[i].rating%><br>
         <%=comment[i].name%>:
         <%=comment[i].comment_text%>
-        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes-1%></div>
+        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
       </div>
   <%}%>
+    </div>
     </div>
   </body>
 </html>

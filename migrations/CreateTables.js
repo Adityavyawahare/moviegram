@@ -2,12 +2,12 @@ var connect=require('../models/index')
 //to create users Table
 exports.movies={
     create: function(){
-        connect.conn.connect.query('create table movies(\n' +
-            '  id INT AUTO_INCREMENT PRIMARY KEY,\n' +
-            '  name VARCHAR(255) NOT NULL,\n' +
-            '  description VARCHAR(255),\n' +
-            '  imdb DECIMAL(2,1) NOT NULL,\n' +
-            '  created_at TIMESTAMP DEFAULT NOW()\n' +
+        connect.conn.connect.query('create table movies(\n'+
+            'id VARCHAR(15) PRIMARY KEY,\n'+
+            'name VARCHAR(300) NOT NULL,\n'+
+            'imdb DECIMAL(2,1) NOT NULL,\n'+
+            'time VARCHAR(20) NOT NULL,\n'+
+            'created_at TIMESTAMP DEFAULT NOW()\n'+
             ');',function (err,result) {
             if (err) throw err;
             console.log("Movies table was created...");
@@ -27,7 +27,7 @@ exports.comments={
             '  id INT AUTO_INCREMENT PRIMARY KEY ,\n' +
             '  comment_text VARCHAR(300) NOT NULL,\n' +
             '  user_id INT NOT NULL,\n' +
-            '  movie_id INT NOT NULL,\n' +
+            '  movie_id VARCHAR(15) NOT NULL,\n' +
             '  created_at TIMESTAMP DEFAULT NOW(),\n' +
             '  FOREIGN KEY(user_id) REFERENCES users(id),\n' +
             '  FOREIGN KEY(movie_id) REFERENCES movies(id)\n' +
@@ -49,7 +49,7 @@ exports.photos={
         connect.conn.connect.query('create table photos(\n' +
             '  id INT AUTO_INCREMENT PRIMARY KEY,\n' +
             '  image_url VARCHAR(255) NOT NULL,\n' +
-            '  movie_id INT NOT NULL,\n' +
+            '  movie_id VARCHAR(15) NOT NULL,\n' +
             '  FOREIGN KEY(movie_id) REFERENCES movies(id)\n' +
             ');',function (err,result) {
             if (err) throw err;
@@ -68,7 +68,7 @@ exports.ratings={
     create: function(){
         connect.conn.connect.query('create table ratings(\n' +
             '  user_id INT NOT NULL,\n' +
-            '  movie_id INT NOT NULL,\n' +
+            '  movie_id VARCHAR(15) NOT NULL,\n' +
             '  comment_id INT NOT NULL,\n' +
             '  rating DECIMAL(2,1) NOT NULL,\n' +
             '  FOREIGN KEY(user_id) REFERENCES users(id),\n' +
@@ -108,7 +108,7 @@ exports.genre_list={
 exports.genre_links={
     create: function(){
         connect.conn.connect.query('create table genre_links(\n' +
-            '  movie_id INT NOT NULL,\n' +
+            '  movie_id VARCHAR(15) NOT NULL,\n' +
             '  genre_id INT NOT NULL,\n' +
             '  FOREIGN KEY(movie_id) REFERENCES movies(id),\n' +
             '  FOREIGN KEY(genre_id) REFERENCES genre_list(id)\n' +

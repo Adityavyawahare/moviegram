@@ -1,61 +1,77 @@
--- create table movies(
---     id VARCHAR(15) PRIMARY KEY,
---     title VARCHAR(300) NOT NULL,
---     imdb VARCHAR(20) NOT NULL,
---     time VARCHAR(20) NOT NULL,
--- created_at TIMESTAMP DEFAULT NOW()
--- );
+drop table users;
+drop table movies;
+drop table comments;
+drop table photos;
+drop table genre_list;
+drop table genre_links;
+drop table likes;
+create table users(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    number VARCHAR(255) UNIQUE NOT NULL,
+     email VARCHAR(255) UNIQUE NOT NULL,
+     password VARCHAR(255) UNIQUE NOT NULL,
+     created_at TIMESTAMP DEFAULT NOW()
+     );
 
--- create table comments(
---         id INT AUTO_INCREMENT PRIMARY KEY ,
---         comment_text VARCHAR(300) NOT NULL,
---         user_id INT NOT NULL,
---         movie_id VARCHAR(15) NOT NULL,
---         created_at TIMESTAMP DEFAULT NOW(),
---         FOREIGN KEY(user_id) REFERENCES users(id),
---         FOREIGN KEY(movie_id) REFERENCES movies(id)
---         );
+create table movies(
+    id VARCHAR(15) PRIMARY KEY,
+    title VARCHAR(300) NOT NULL,
+    imdb VARCHAR(20) NOT NULL,
+    time VARCHAR(20) NOT NULL,
+created_at TIMESTAMP DEFAULT NOW()
+);
 
--- create table photos(
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     image_url VARCHAR(255) NOT NULL,
---     movie_id VARCHAR(15) NOT NULL,
---     FOREIGN KEY(movie_id) REFERENCES movies(id)
---     );
+create table comments(
+        id INT AUTO_INCREMENT PRIMARY KEY ,
+        comment_text VARCHAR(300) NOT NULL,
+        user_id INT NOT NULL,
+        movie_id VARCHAR(15) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW(),
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(movie_id) REFERENCES movies(id)
+        );
 
--- create table ratings(
---     user_id INT NOT NULL,
---     movie_id VARCHAR(15) NOT NULL,
---     comment_id INT NOT NULL,
---     rating DECIMAL(2,1) NOT NULL,
---     FOREIGN KEY(user_id) REFERENCES users(id),
---     FOREIGN KEY(movie_id) REFERENCES movies(id),
---     FOREIGN KEY(comment_id) REFERENCES comments(id)
---     );
+create table photos(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_url VARCHAR(255) NOT NULL,
+    movie_id VARCHAR(15) NOT NULL,
+    FOREIGN KEY(movie_id) REFERENCES movies(id)
+    );
 
--- create table genre_list(
---     id INT AUTO_INCREMENT PRIMARY KEY ,
---     genre_text VARCHAR(255) NOT NULL
---     );
+create table ratings(
+    user_id INT NOT NULL,
+    movie_id VARCHAR(15) NOT NULL,
+    comment_id INT NOT NULL,
+    rating DECIMAL(2,1) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(movie_id) REFERENCES movies(id),
+    FOREIGN KEY(comment_id) REFERENCES comments(id)
+    );
 
--- create table genre_links(
---     movie_id VARCHAR(15) NOT NULL,
---     genre_id INT NOT NULL,
---     FOREIGN KEY(movie_id) REFERENCES movies(id),
---     FOREIGN KEY(genre_id) REFERENCES genre_list(id)
---     );
+create table genre_list(
+    id INT AUTO_INCREMENT PRIMARY KEY ,
+    genre_text VARCHAR(255) NOT NULL
+    );
 
--- create table likes(
---     user_id INT NOT NULL,
---     comment_id INT NOT NULL,
---     FOREIGN KEY(user_id) REFERENCES users(id),
---     FOREIGN KEY(comment_id) REFERENCES comments(id)
---     PRIMARY KEY(user_id,comment_id)
---     );
--- INSERT INTO movies(id,name,imdb,time) VALUES(
---     'tt0993846', 'The Wolf of Wall Street', 8.2, '180 min'
--- )
-SHOW databases;
+create table genre_links(
+    movie_id VARCHAR(15) NOT NULL,
+    genre_id INT NOT NULL,
+    FOREIGN KEY(movie_id) REFERENCES movies(id),
+    FOREIGN KEY(genre_id) REFERENCES genre_list(id)
+    );
+
+create table likes(
+    user_id INT NOT NULL,
+    comment_id INT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(comment_id) REFERENCES comments(id)
+    PRIMARY KEY(user_id,comment_id)
+    );
+INSERT INTO movies(id,name,imdb,time) VALUES(
+    'tt0993846', 'The Wolf of Wall Street', 8.2, '180 min'
+)
+-- SHOW databases;
 -- INSERT INTO movies(id,name,imdb,time) VALUES
 --     ( 'tt9620292', 'Promising Young Woman', 7.4, '113 min' ),
 --     ( 'tt10451914', 'Outside the Wire', 7.9, '114 min' ),

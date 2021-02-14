@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+node_modules
+.idea
+untitled-1
+sample
+=======
 node_modules
 .idea
 .sql
+>>>>>>> cb5e00c515008d479b3359185dba7744cfb0f582

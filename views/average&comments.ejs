@@ -1,0 +1,68 @@
+<script>
+  function myfunc(x) {
+    document.getElementById("like_button"+x).disabled = true;
+    $(document).ready(function () {
+        $(this).prop('disabled', true);
+        $.post("/add_like", {
+                  comment_id: x
+                },
+                function (data,status) {
+                  $("#gg"+x.toString()).text(data);
+                });
+      });
+    }
+  function myfunc2(x) {
+    $(document).ready(function () {
+      $.post("/order_by", {
+                value: x
+              },function(html){
+        $("#comments_sec").html(html);
+      });
+    })
+  }
+  $(() => {
+const $form = $('#comment_inserted')
+
+$form.on('submit', myfunc3)
+
+function myfunc3 (e) {
+e.preventDefault()
+const options = {
+  method: $form.attr('method'),
+  url: $form.attr('action'),
+  data: $form.serialize()
+}
+
+$.ajax(options).done(html => {
+  $("#average_sec").html(html);
+})
+}
+})    
+</script>
+<h1 align="center"><%=average%></h1>
+    <p align="center">Rated by Users</p>
+  <form action="/get_comment" method="post" id="comment_inserted">
+    <label>
+      <input type="number" placeholder="rate here.." name="input_rating" step="0.1" required>
+    <input type="text" placeholder="comment here.." name="input_comment" required>
+      <button type="submit" value="submit">comment</button>
+    </label>
+  </form>
+    <br>
+    <label for="order_by">Order by:</label>
+
+    <select name="order_by" id="drop" onchange="myfunc2(value)" >
+      <option value='created_at'>Newest First</option>
+      <option value='likes'>Top Comment</option>
+    </select>
+    <div id="comments_sec">
+  <%for(var i=0;i<comment.length;i++){%>
+      <div align="left" class="comment_section">
+        <div style="display: none" id="comment_id"><%=comment[i].id%></div>
+        Rated :<%=comment[i].rating%><br>
+        <%=comment[i].name%>:
+        <%=comment[i].comment_text%>
+        <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
+      </div>
+  <%}%>
+    </div>
