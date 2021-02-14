@@ -25,9 +25,9 @@ var crud={
         });
     },
     order_by: function(data,callback) {
-            connect.conn.connect.query("SELECT rating,comments.id,name,comment_text,count(*) as likes,comments.created_at\n"+
+            connect.conn.connect.query("SELECT rating,comments.id,name,comment_text,(select count(*) from likes where comment_id=comments.id) as likes,comments.created_at\n"+
                 " from comments left join ratings on comments.id = ratings.comment_id left join likes on likes.comment_id = comments.id inner join users\n"+
-                " on users.id = comments.user_id  where comments.movie_id="+data.movie_id+" group by comments.id ORDER BY\n"+
+                " on users.id = comments.user_id  where comments.movie_id='"+data.movie_id+"' group by comments.id ORDER BY\n"+
                 data.value+" DESC;", function (err, result) {
                 if (err) throw err;
                 console.log("SELECT comments.id,name,comment_text,count(*) as likes,comments.created_at\n"+

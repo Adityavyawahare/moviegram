@@ -279,23 +279,43 @@ exports.show_movie=async function(req,res,next){
             })
     });
 }
-exports.get_comment=function (req,res,next) {
-    var data= [];
+exports.get_comment=async function (req,res,next) {
+    var v= [];
     var cur_comment_id;
     // if(user_id===undefined)
     // {
     //     res.redirect('/');
     // }
-    data.push([
+    async function auth() {
+        var uni = unirest("GET", "http://www.omdbapi.com/?");
+        const val= await uni.query({
+            "i": cur_movie_id,
+            "plot":"full",
+            "apikey":'9b728400'
+            })
+            .then((val) => {
+                return new Promise((response,reject)=>{
+                    if (val.error) 
+                    {
+                        res.redirect('/movies');
+                        throw new Error(val.error);
+                    }
+                    response(val);
+                })
+              });
+        return val;
+    }
+    v.push([
         req.body.input_comment,
         user_id,
         cur_movie_id,
         new Date().toISOString().slice(0, 19).replace('T', ' ')
     ])
     console.log(new Date().toISOString().slice(0, 19).replace('T', ' '));
-    console.log([data]);
+    console.log([v]);
     var rate=[];
-    comments.insert([data],()=>{
+    await auth().then(async function (data) {
+        comments.insert([v],()=>{
         comments.get_id({user_id:user_id,movie_id:cur_movie_id},function(x){
             cur_comment_id=x;
             rate.push([
@@ -306,10 +326,18 @@ exports.get_comment=function (req,res,next) {
             ]);
             console.log([rate]);
             ratings.insert([rate],function () {
-                res.redirect('/movies/' + req.params.movie_id);
+                comments.display(cur_movie_id,function (result) {
+                    com=result;
+                    movies.average_rating(cur_movie_id,function (avg) {
+                        res.render('average&comments',{title:'Moviegram',movie_data:data.body,comment:com,average:avg},function(err,html){
+                            res.send(html);
+                        })
+                    });
+                })
             });
         })
     });
+})
 }
 exports.add_like=function(req,res,next){
     var data=[];
