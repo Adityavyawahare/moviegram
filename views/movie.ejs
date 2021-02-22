@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -54,13 +58,29 @@
   })    
     </script>
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  <img src="<%=movie_data.Poster%>" class="img-rounded">
-  <p><strong><%=movie_data.Title%>(<%=movie_data.Year%>)<div align="right">IMDB :<%=movie_data.imdbRating%></div></strong></p>
-  <p>Rated :<%=movie_data.Rating%></p>
-  <p><%=movie_data.Plot%></p>
+  <body class="movie">
+    <div class="header">
+      <h1 class="title"><a href="/movies"><%= title %></a></h1>
+    </div>
+    <div class="flex-container">
+      <div class="data">
+        <p class="titl" style="display: inline;"><%=movie_data.Title%>(<%=movie_data.Year%>)<div style="display: inline; padding-left: 40%;" class="imdb_data">IMDB :<%=movie_data.imdbRating%></div></p>
+        <p>Rated : <%=movie_data.Rated%></p>
+        <p>Released : <%=movie_data.Released%></p>
+        <p><%=movie_data.Genre%></p>
+        <p>Director : <%=movie_data.Director%></p>
+        <p>Writer : <%=movie_data.Writer%></p>
+        <p>Actors : <%=movie_data.Actors%></p>
+        <p><%=movie_data.Plot%></p>
+        <p>Language : <%=movie_data.Language%></p>
+        <p>Country : <%=movie_data.Country%></p>
+        <p>Awards : <%=movie_data.Awards%></p>
+        <p>Type : <%=movie_data.Type%></p>
+      </div>
+      <div class="poster" >
+        <img src="<%=movie_data.Poster%>" class="img-rounded"> 
+      </div>
+    </div>
   <div id="average_sec">
     <h1 align="center"><%=average%></h1>
     <p align="center">Rated by Users</p>
@@ -68,15 +88,16 @@
     <label>
       <input type="number" placeholder="rate here.." name="input_rating" step="0.1" required>
     <input type="text" placeholder="comment here.." name="input_comment" required>
-      <button type="submit" value="submit">comment</button>
+      <button type="submit" value="submit">+  COMMENT</button>
     </label>
   </form>
     <br>
-    <label for="order_by">Order by:</label>
-
+    <label for="order_by" class="drop">ORDER BY:</label>
     <select name="order_by" id="drop" onchange="myfunc2(value)" >
+      <div class="dropdown-content">
       <option value='created_at'>Newest First</option>
       <option value='likes'>Top Comment</option>
+    </div>
     </select>
     <div id="comments_sec">
   <%for(var i=0;i<comment.length;i++){%>
@@ -84,11 +105,14 @@
         <div style="display: none" id="comment_id"><%=comment[i].id%></div>
         Rated :<%=comment[i].rating%><br>
         <%=comment[i].name%>:
-        <%=comment[i].comment_text%>
+        <%=comment[i].comment_text%><br>
         <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
       </div>
   <%}%>
     </div>
+    </div>
+    <div class="footer">
+        <p>CREATED BY ADITYA VYAWAHARE</p>
     </div>
   </body>
 </html>

@@ -223,6 +223,7 @@ exports.show_movie=async function(req,res,next){
         }
         await auth().then(async function (data) {
             console.log(gg);
+            console.log(data.body);
             if(gg==0)
             {   
                 var data_movies=[];

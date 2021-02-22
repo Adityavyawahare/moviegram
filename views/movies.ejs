@@ -7,55 +7,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Roboto:wght@300&family=Special+Elite&family=Yusei+Magic&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
-
     </script>
   </head>
   <body class="movies">
   <div class="flex-container">
-    <h1 class="title"><%= title %></h1>
-    <div class="search-container">
-      <form action="/search" method="post">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
     <div class="form">
       <form action="/movies" method="post">
-    <p style="text-align: center; font-weight: bolder; margin: 15px;">FILTER BY</p>
+    <p style="text-align: center; font-weight: bolder; margin: 15px; font-size: x-large;">FILTER BY</p>
         <p class="topic">BY GENRE</p>
         <%for(var i=0;i<genres_data.length;i++){%>
-          <label for="<%=genres_data[i].text%>" class="data">
+          <label class="cc" for="<%=genres_data[i].text%>" class="data">
             <input id="<%=genres_data[i].text%>" type="radio" name="genre" value="<%=genres_data[i].id%>" >
+              <span class="ll"></span>
               <%=genres_data[i].text%>
           </label>
           <br>
           <%}%>
     <p class="topic" >BY IMDB</p>
-    <label for="imdb8+" class="data">
+    <label class="cc" for="imdb8+" class="data">
       <input id="imdb8+" type="radio" name="imdb" value=">8" >
+      <span class="ll"></span>
       imdb 10-8
     </label>
     <br>
-    <label for="imdb6+" class="data">
+    <label class="cc" for="imdb6+" class="data">
       <input id="imdb6+" type="radio" name="imdb" value="BETWEEN 6 AND 8" >
+      <span class="ll"></span>
       imdb 8-6
     </label>
     <br>
-    <label for="imdb6-" class="data">
+    <label class="cc" for="imdb6-" class="data">
       <input id="imdb6-" type="radio" name="imdb" value="<6" >
+      <span class="ll"></span>
       imdb below 6
     </label>
     <br>
     <p class="topic">BY POPULARITY</p>
-    <label for="byincr" class="data">
+    <label class="cc" for="byincr" class="data">
       <input id="byincr" type="radio" name="sort" value="ASC" >
+      <span class="ll"></span>
       by incr
     </label>
     <br>
-    <label for="bydecr" class="data">
+    <label class="cc" for="bydecr" class="data">
       <input id="bydecr" type="radio" name="sort" value="DESC" >
+      <span class="ll"></span>
       by decr
     </label>
         <br>
@@ -66,18 +65,32 @@
         </div>
       </form>
     </div>
-    <div class="main flex-container">
+    <div class="flex-container2">
+    <div class=header>
+      <h1 class="title"><a href="/movies"><%= title %></a></h1>
+    </div>
+    <div class="search-container">
+      <form action="/search" method="post">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="main flex-container3">
       <%for(var i=0;i<movies.length;i++){%>
       <div class="gallery">
         <a href="/movies/<%=movies[i].id%>">
           <img src="<%=movies[i].image_url%>" alt="<%=movies[i].name%>" onclick="" >
         <p><%=movies[i].name%><br>
-          IMDB: <%=movies[i].imdb%>
+          <span>IMDB: <%=movies[i].imdb%></span>
         </p>
         </a>
       </div>
       <%}%>
     </div>
   </div>
+  </div>
+  <div class="footer">
+    <p>CREATED BY ADITYA VYAWAHARE</p>
+</div>
   </body>
 </html>
