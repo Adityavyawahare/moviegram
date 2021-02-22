@@ -3,7 +3,7 @@
     <div style="display: none" id="comment_id"><%=comment[i].id%></div>
     Rated :<%=comment[i].rating%><br>
     <%=comment[i].name%>:
-    <%=comment[i].comment_text%>
+    <%=comment[i].comment_text%><br>
     <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
   </div>
 <%}%>
