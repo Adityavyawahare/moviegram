@@ -20,6 +20,13 @@
       });
     })
   }
+  function myfunc4() {
+    $(document).ready(function () {
+      $.get("/get_news",function(html){
+        $("#change").html(html);
+      });
+    })
+  }
   $(() => {
 const $form = $('#comment_inserted')
 
@@ -41,6 +48,11 @@ $.ajax(options).done(html => {
 </script>
 <h1 align="center"><%=average%></h1>
     <p align="center">Rated by Users</p>
+    <div id="change">
+    <div class='menu'>
+      <button><div class='design' style='background-color: #787878; '><p style='color: #011d2b;'>COMMENTS</p></div></button>
+      <button onclick="myfunc4()"><div class='design'><p>NEWS</p></div></button>
+    </div>
   <form action="/get_comment" method="post" id="comment_inserted">
     <label>
       <input type="number" placeholder="rate here.." name="input_rating" step="0.1" required>
@@ -66,4 +78,5 @@ $.ajax(options).done(html => {
         <button id="like_button<%=comment[i].id%>" onclick="myfunc(<%=comment[i].id%>)" ><i class="fa fa-thumbs-up"></i></button><div id="gg<%=comment[i].id%>" style="display: inline"><%=comment[i].likes%></div>
       </div>
   <%}%>
+    </div>
     </div>

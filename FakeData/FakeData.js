@@ -304,7 +304,6 @@ exports.insertIn={
                  photos.insert([data_v]);
             }
         })
-
     }
 },
     comments: function(){

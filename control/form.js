@@ -10,6 +10,8 @@ let createTables=require('../migrations/CreateTables')
 let fakes=require('../FakeData/FakeData');
 let app=require('../app')
 var unirest = require('unirest');
+var fetch=require('node-fetch');
+var cheerio=require('cheerio');
 
 //create users table for manipulation
 createTables.likes.drop();
@@ -364,4 +366,112 @@ exports.order_by=function(req,res,next){
                     res.send(html);
                 })
             })
+}
+
+exports.get_news=function(req,ree,next){
+    var obj=[];
+  fetch('https://news.google.com/search?hl=en-IN&gl=IN&ceid=IN:en&q='+ cur_movie_name +' movie')
+    .then(res => res.text())
+    .then(body => {
+      const $ = cheerio.load(body);
+      $('div.NiLAwe.y6IFtc.R7GTQ.keNKEd.j7vNaf.nID9nc').each(function(i,element){
+        // const $element=$(element);
+        const title=$(element)
+        .find('div.xrnccd h3.ipQwMb.ekueJc.RD0gLb')
+        .text();
+
+        const link=$(element)
+        .find('div.xrnccd h3.ipQwMb.ekueJc.RD0gLb a')
+        .attr('href')
+        
+        const description=$(element)
+        .find('div.xrnccd div.Da10Tb.Rai5ob span')
+        .text();
+
+        const publication=$(element)
+        .find('div.xrnccd div.QmrVtf.RD0gLb.kybdz div.SVJrMe a')
+        .text();
+
+        const publication_link=$(element)
+        .find('div.xrnccd div.QmrVtf.RD0gLb.kybdz div.SVJrMe a')
+        .attr('href');
+
+        const image_link=$(element)
+        .find('img.tvs3Id.QwxBBf')
+        .attr('src');
+        
+        const time=$(element)
+        .find('time.WW6dff.uQIVzc.Sksgp')
+        .text();
+
+        function f(){
+          if(publication_link===undefined)
+                {
+                  return '';
+                }
+                else{
+                return 'https://news.google.com'+publication_link.slice(1)
+                } 
+        }
+
+        obj.push({
+          'title':title,
+          'link':'https://news.google.com'+link.slice(1),
+          'description':description,
+          'publication':publication,
+          'publication_link':f(),
+          'image_link':image_link,
+          'time':time
+        });
+        // console.log(time);
+        // console.log(image_link);
+        // console.log(publication)
+        // console.log(title);
+        // console.log('https://news.google.com'+link.slice(1));
+        // console.log(description);
+        // console.log(publication);
+        // console.log($element.text());
+        // res.render('index', { title: 'Express' });
+        console.log('done');
+      }
+      )
+      ree.render('news', {news: obj}, function (err, html) {
+        console.log(obj[0].link);
+        console.log(html);
+        ree.send(html);
+    })
+    });
+}
+
+exports.get_average_and_comments=async function (req,res,next) {
+    async function auth() {
+        var uni = unirest("GET", "http://www.omdbapi.com/?");
+        const val= await uni.query({
+            "i": cur_movie_id,
+            "plot":"full",
+            "apikey":'9b728400'
+            })
+            .then((val) => {
+                return new Promise((response,reject)=>{
+                    if (val.error) 
+                    {
+                        res.redirect('/movies');
+                        throw new Error(val.error);
+                    }
+                    response(val);
+                })
+              });
+        return val;
+    }
+    var rate=[];
+    await auth().then(async function (data) {
+    comments.display(cur_movie_id,function (result) {
+        com=result;
+        movies.average_rating(cur_movie_id,function (avg) {
+            res.render('average&comments',{title:'Moviegram',movie_data:data.body,comment:com,average:avg},function(err,html){
+                    res.send(html);
+            })
+        });
+    })
+})
 }

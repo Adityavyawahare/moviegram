@@ -1,0 +1,68 @@
+<script>
+    function myfunc(x) {
+      document.getElementById("like_button"+x).disabled = true;
+      $(document).ready(function () {
+          $(this).prop('disabled', true);
+          $.post("/add_like", {
+                    comment_id: x
+                  },
+                  function (data,status) {
+                    $("#gg"+x.toString()).text(data);
+                  });
+        });
+      }
+    function myfunc2(x) {
+      $(document).ready(function () {
+        $.post("/order_by", {
+                  value: x
+                },function(html){
+          $("#comments_sec").html(html);
+        });
+      })
+    }
+    function myfunc4() {
+      $(document).ready(function () {
+        $.get("/average_comments",function(html){
+          $("#average_sec").html(html);
+        });
+      })
+    }
+    $(() => {
+const $form = $('#comment_inserted')
+
+$form.on('submit', myfunc3)
+
+function myfunc3 (e) {
+  e.preventDefault()
+  const options = {
+    method: $form.attr('method'),
+    url: $form.attr('action'),
+    data: $form.serialize()
+  }
+
+  $.ajax(options).done(html => {
+    $("#average_sec").html(html);
+  })
+  }
+})    
+</script>
+<div class='menu'>
+    <button onclick="myfunc4()"><div class='design' ><p>COMMENTS</p></div></button>
+    <button><div class='design' style='background-color: #787878; '><p style='color: #011d2b;'>NEWS</p></div></button>
+</div>
+<div id="news_sec">
+    <%for(var i=0;i<10;i++){%>
+      <div align="left" class="news_section">
+        <div class="news_image">
+            <img src="<%=news[i].image_link%>">
+        </div>
+        <div class="des">
+            <div><a href="<%=news[i].link%>" target="_blank"><%=news[i].title%></a></div>
+            <p><%=news[i].description%></p>
+            <div class="publication"><a href="<%=news[i].publication_link%>" target="_blank"><%=news[i].publication%></a>
+            <p><%=news[i].time%></p>
+            </div>
+        </div>
+        </div>
+    <%}%>
+  </div>
