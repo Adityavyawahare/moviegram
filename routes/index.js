@@ -13,4 +13,6 @@ router.post('/add_like',form.add_like);
 router.post('/order_by',form.order_by);
 router.get('/movies/:movie_id',form.show_movie);
 router.post('/get_comment',form.get_comment);
+router.get('/get_news',form.get_news)
+router.get('/average_comments',form.get_average_and_comments)
 module.exports = router;
