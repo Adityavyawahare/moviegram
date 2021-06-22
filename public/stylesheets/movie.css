@@ -1,0 +1,302 @@
+.movie {
+    margin:10px 5px; 
+    background: #121212;
+  }
+  .movie .header{
+    background: #282828;
+    margin:0px 0px 20px 0px;
+    width:100%;
+    box-sizing: border-box;
+  }
+  .movie .flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height:100%;
+  }
+  .movie .header .title {
+    align-content: center;
+    font-size: 70px;
+    font-family: "Staatliches",sans-serif;
+    color: #356e68;
+    text-shadow: 5px 5px rgb(166, 217, 237) ;
+    width:90%;
+    text-align: center;
+    margin: auto;
+  }
+  .movie .header .title a{
+    text-decoration: none; 
+    color: #356e68;
+  }
+  .movie .flex-container .poster{
+    flex:30%;
+  }
+  .movie .flex-container .poster img{
+    display: block;
+    width:70%;
+    height: auto;
+    margin: auto auto auto auto ;
+    border-radius: 30px;
+  }
+  .movie .flex-container .data p{
+    margin: 2vh 0px;
+  }
+  .movie .data .imdb_data{
+    color:#B3B3B3;
+    opacity:0.7;
+    font-family: 'Roboto', sans-serif;
+    font-size: 4vh;
+  }
+  .movie .flex-container .data{
+    flex:70%;
+    padding:1% 5%;
+    box-sizing: border-box;
+  }
+  .movie .flex-container .data p.titl{
+    color:#FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 5vh;
+  }
+  .movie .flex-container .data p{
+    color:#B3B3B3;
+    font-family: 'Roboto', sans-serif;
+  }
+  .movie .data i{
+    color: yellow;
+    font-size: 140%;
+  }
+  .movie #average_sec h1{
+    color:#B3B3B3;
+    font-family: 'Poppins', sans-serif;
+    margin: 5px 0px;
+  }
+  .movie #average_sec p{
+    color:#B3B3B3;
+    font-family: 'Poppins', sans-serif;
+    font-size: large;
+    margin: 0px 0px 5px 0px;
+  }
+  div.comment_section{
+    background-color:#121212;
+    border-bottom: 2px solid #404040;
+    margin:10px 6%;
+    padding: 1px;
+    color: #BDBDBD;
+    font-family: 'Roboto', sans-serif;
+  }
+  #comment_inserted{
+    margin:0px 0px 0px 7%;
+  }
+  #average_sec form#comment_inserted input[type="number"]{
+    width: 9%;
+    height: 5vh;
+    padding: 12px 12px;
+    margin: 3px 3px 3px 3px;
+    background-color: #323F4B;
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid #627398;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: medium;
+  }
+  #average_sec form#comment_inserted input[type="text"]{
+    width: 70%;
+    height: 5vh;
+    padding: 12px 12px;
+    margin: 3px 3px 3px 3px;
+    background-color: #323F4B;
+    box-sizing: border-box;
+    border-radius: 14px;
+    border: 2px solid #627398;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: medium;
+  }
+  #average_sec form#comment_inserted button{
+    width: 7%;
+    height: 5vh;
+    padding: 5px 5px;
+    border-radius: 50px;
+    margin: 5px 5px 5px 10px;
+    background-color: #C9F7F2;
+    color:black;
+    border: 0px;
+    font-weight: 750;
+    cursor: pointer;
+  }
+  .movie ::-webkit-input-placeholder{
+    color: #9AA5B1;
+    font-size: large;
+  }
+  .movie .comment_section button{
+    color: #00B7FF;
+    background-color: #121212;
+    height:8px;
+    border:0px;
+    cursor: pointer;
+  }
+  .movie .comment_section button:focus{
+    color: white;
+    outline: none;
+  }
+  .movie .comment_section button:disabled{
+    color: #9e9e9e;
+  }
+  .movie .menu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height:100%;
+    padding: 2% 5%;
+  }
+  .movie .menu .design{
+    box-sizing: border-box;
+    border-bottom: 1px solid #404040;
+    flex: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0% 2%;
+    border-radius: 15px 15px 0vw 0vw;
+  }
+  .movie .menu .design:hover{
+    background-color: #212121;
+  }
+  .movie #average_sec .menu .design:hover p{
+    color: white;
+  }
+  .movie #average_sec .menu button{
+    flex:30%;
+    height: 4vw;
+    background-color: #121212;
+    border:0px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 1px 2%;
+    outline:none;
+  }
+  .movie #average_sec .menu button:focus .design{
+    background-color: #616161;
+  }
+  .movie #average_sec .menu button:focus .design p{
+    color: white;
+  }
+  .movie #average_sec .menu p{
+    box-sizing: border-box;
+    margin:auto 0px;
+  }
+  .movie #news_sec{
+    border-bottom: 1px solid #404040;
+  }
+  .movie #news_sec .news_section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color:#121212;
+    border-bottom: 2px solid #404040;
+    margin:5px 6%;
+    padding: 1vw 1px;
+    color: #BDBDBD;
+    font-family: 'Roboto', sans-serif;
+  }
+  .movie #news_sec .news_section .news_image{
+    margin:0px 3vw 0px 0px;
+  }
+  .movie #news_sec .news_section .des{
+    flex:30%;
+  }
+  .movie #news_sec .news_section .des a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    text-decoration: none;
+    color:white;
+  }
+  .movie #news_sec .news_section .des a:hover{
+    text-decoration: underline;
+  }
+  .movie #news_sec .news_section .des .publication a{
+    font-size: 20px;
+    color: #CBD2D9;
+    margin:15px;
+  }
+  .movie #news_sec .news_section .des .publication{
+    padding:12px;
+  }
+  .movie #news_sec .news_section .des .publication a:hover{
+    text-decoration: underline;
+  }
+  .movie #news_sec .news_section .des p{
+    font-size: 15px;
+  }
+  .movie #news_sec .news_section .news_image img{
+    border-radius: 18%;
+  }
+  .movie #news_sec .news_section p{
+    display:inline;
+  }
+  #average_sec form#comment_inserted button:hover{
+    opacity:0.8;
+  }
+  .drop{
+    font-family: 'Poppins', sans-serif;
+    color: #BDBDBD;
+    margin:0px 0px 0px 40%;
+    font-size: 25px;
+  }
+  #drop{
+    color:black;
+    background-color: #C9F7F2;
+    width:10%;
+    height:40px;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+  }
+  #drop:hover{
+    opacity:0.8;
+  }
+  #drop:focus{
+    outline:none;
+  }
+  option{
+    color:black;
+    background-color: #C9F7F2;
+    margin:2px;
+  }
+  
+  div.main{
+    float:right;
+    width:90%;
+    box-sizing: border-box;
+  }
+  label{
+    font-size: small;
+  }
+  a {
+    color: #00B7FF;
+  }
+  .footer{
+    margin-top: 35px;
+    background-color: #0A3140;
+    height:8vw;
+    padding:50px;
+}
+.footer p{
+  padding: 50px;
+  height:40%;
+  text-align: center;
+  color: #00B7FF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 150%;
+}
+  

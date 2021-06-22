@@ -1,0 +1,149 @@
+html{
+    height:100%;
+  }
+  body.signup{
+    background: url("../images/signup-blue.jpg") no-repeat fixed;
+    background-size: cover;
+    height: 98%;
+  }
+  .flex-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+  }
+  
+  .signup div.background{
+    background-color:rgba(230, 244, 250,0.4) ;
+    width: 40%;
+    height: 100%;
+    text-align:center;
+    padding: 25px;
+    margin: auto auto auto auto;
+  }
+  
+  .title{
+    font-size: 120px;
+    font-family: "Staatliches",sans-serif;
+    color: rgb(235, 244, 252);
+    text-shadow: 5px 5px black ;
+  }
+  .footer{
+      margin-top: 35px;
+      background-color: #0A3140;
+      height:8vw;
+      padding:50px;
+  }
+  .footer p{
+    padding: 50px;
+    height:40%;
+    text-align: center;
+    color: #00B7FF;
+    font-family: 'Oswald', sans-serif;
+    font-size: 150%;
+  }
+  .signup label{
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 30px;
+    color:rgb(0, 12, 31);
+    text-shadow: 2px 2px rgb(189, 197, 199);
+  }
+  
+  .signup input[type=email],input[type=password],input[type=text],input[type=number] {
+    width: 50%;
+    padding: 12px 18px;
+    margin: 8px 0;
+    background-color: rgba(225, 241, 245,0.4);
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 2px solid #91C4D9;
+    display: inline-block;
+    color: rgb(0, 12, 31);
+    font-size: large;
+  }
+  .signup input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,input[type=number]:focus {
+    border: solid 2px #0A3140;
+    outline: none;
+  }
+  ::-webkit-input-placeholder{
+    color: rgb(12, 108, 135);
+    font-size: large;
+  }
+  
+  .signup button{
+    border:none;
+    font-size: 22px;
+    color: rgb(66,69,86);
+    padding:5px 10px;
+    margin: 5px;
+    background: rgba(255,255,255,0.7) ;
+    border-radius: 10px;
+    opacity:0.8;
+    cursor: pointer;
+  }
+  
+  .signup button:hover{
+    background: rgba(255,255,255,1.0) ;
+  }
+  
+  .signup a{
+    background: rgba(6, 78, 92,0.3);
+    border-radius: 10px;
+    color: rgb(38, 175, 201);
+    text-decoration: none;
+  }
+  .signup a:hover{
+    background: rgba(6, 78, 92,0.8);
+  }
+  .signup a:active{
+    background: rgba(6, 78, 92,0.9);
+  }
+  .signup a:visited{
+    background: rgba(6, 78, 92,0.7);
+    color:black;
+  }
+  
+  .signup .form{
+    border:none;
+    border-bottom: 3px solid #ebebeb;
+    color: white;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .title {
+      font-size: 60px;
+    }
+    .signup div.background{
+      background-color:rgba(230, 244, 250,0.1) ;
+      width: 70%;
+      height: 100%;
+      text-align:center;
+      padding: 25px;
+      margin: auto auto auto auto;
+    }
+    .signup label {
+      font-size: 15px;
+      text-shadow: 1px 1px rgb(189, 197, 199);
+      display: block;
+      text-align:left;
+    }
+    .signup input[type=email],input[type=password],input[type=text],input[type=number] {
+      border-radius: 5px;
+      width: 95%;
+      padding: 2px 2px;
+      margin: 4px 0;
+    }
+    .signup button{
+      border:none;
+      font-size: 20px;
+      padding:5px 10px;
+      margin: 35px 5px;
+    }
+    .signup a{
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 20px;
+    }
+  }

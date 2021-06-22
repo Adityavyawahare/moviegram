@@ -1,0 +1,298 @@
+html{
+    height:100%;
+    width:100%;
+  }
+  body.movies{
+    background: #212121;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin:0px;
+  }
+  .movies .flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height:100%;
+  }
+  .movies .flex-container2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height:100%;
+    flex:70%;
+  }
+  .movies .flex-container3{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: flex-start;
+    height:100%;
+    flex:70%;
+  }
+  
+  .movies .header{
+    flex:100%;
+    box-sizing: border-box;
+  }
+  .header{
+    background: #181818;
+    /* position: fixed; */
+    width:100%;
+    box-sizing: border-box;
+  }
+  .header .title {
+    align-content: center;
+    font-size: 70px;
+    font-family: "Staatliches",sans-serif;
+    color: #356e68;
+    text-shadow: 5px 5px rgb(166, 217, 237) ;
+    width:90%;
+    text-align: center;
+    margin: auto;
+  }
+  .header .title a{
+    text-decoration: none; 
+    color: #264d48;
+  }
+  .movies .search-container{
+    background: #181818;
+    flex:70%;
+    padding:0px 3% 0px 10%;
+    margin-bottom: 2%; 
+    box-sizing: border-box;
+  }
+  .movies input[type=text]{
+    width: 80%;
+    padding: 8px 20px;
+    margin: 8px 8px;
+    background-color: #323F4B;
+    box-sizing: border-box;
+    border-radius: 40px;
+    border: 2px solid #627398;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: large;
+  }
+  .search-container button{
+    width: 75px;
+    height: 5vh;
+    border-radius: 50px;
+    color:#000000;
+    background-color: #9ba8a8;
+  }
+  .movies input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,input[type=number]:focus {
+    border: solid 2px  #CBD2D9;
+    outline: none;
+  }
+  ::-webkit-input-placeholder{
+    color: #9AA5B1;
+    font-size: large;
+  }
+  
+  .movies .search-container button:hover{
+    background: rgba(255,255,255,1.0) ;
+  }
+  .movies .form .topic{
+    color: #616161;
+    font-size: x-large;
+    border-bottom: #515151 0.6px solid;
+  }
+  .movies .form label{
+    color: #7E7E7E;
+  }
+  .movies .form{
+    background: #121212;
+    width:10%;
+    height: 100%;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+    /* margin:30px; */
+    padding:30px;
+    /* border-radius: 15px; */
+  }
+  .cc {
+    position: relative;
+    padding-left: 20px;
+    font-size: 70%;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .movies .form .cc input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .movies .form .cc .ll {
+    position: absolute;
+    top: 5px;
+    left: -6px;
+    height: 18px;
+    width: 18px;
+    background-color: #343434;
+    border-radius: 100%;
+  }
+  label.cc:hover {
+    color: #FFFFFF;
+  }
+  .movies .cc input[type="radio"]:checked {
+    color: #FFFFFF;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  label.cc:hover input[type="radio"] ~ .ll {
+    background: #7e7e7e;
+  }
+  /* When the radio button is checked, add a blue background */
+  .cc input:checked[type="radio"] ~ .ll {
+    background-color: #343434;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .ll:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .cc input[type="radio"]:checked ~ .ll:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .cc .ll:after {
+       top: 4.5px;
+      left: 4.5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background: #03DAC6;
+  }
+  
+  .movies .topic{
+    font-size: 25px;
+    width:100%;
+    margin: 2px
+  }
+  .movies .data{
+    font-size: 20px;
+    width:100%;
+    margin: 1px;
+  }
+  .movies .button{
+    background-color: #03DAC6;
+    border:none;
+    font-size: 23px;
+    font-weight: 750;
+    padding:6px 16px;
+    margin: 15%;
+    border-radius: 20px;
+    opacity:1;
+    cursor: pointer;
+  }
+  
+  .movies button:hover{
+    background-color: #03DAC6;
+    opacity:0.8;
+  }
+  
+  .movies .main{
+    flex:70%;
+  }
+  .movies div.gallery span{
+    color:#B3B3B3;
+  }
+  .movies div.gallery{
+    background: #3B3B3B;
+    margin: 8px 5px;
+    border: 1px solid #3B3B3B;
+    float:right;
+    width: 260px;
+    height: calc(280px * (16/10));
+    padding:5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  .movies a{
+    text-decoration: none;
+  }
+  div.gallery:hover{
+    border:1px solid white;
+    margin-top:0px;
+    margin-bottom: 16px;
+  }
+  div.gallery:hover img{
+    opacity:0.9;
+  }
+  div.gallery img{
+    align-content: center;
+    width: 250px;
+    height: calc(250px * (445/300));
+    border-radius: 10px;
+  }
+  div.gallery p{
+    padding: auto;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+    font-size: large;
+    margin:7px;
+  }
+  .footer{
+    margin-top: 35px;
+    background-color: #0A3140;
+    height:8vw;
+    padding:50px;
+    }
+    .footer p{
+        padding: 50px;
+        height:40%;
+        text-align: center;
+        color: #00B7FF;
+        font-family: 'Oswald', sans-serif;
+        font-size: 150%;
+    }
+  
+  @media screen and (max-width: 600px) {
+    .title {
+      font-size: 60px;
+    }
+    .movies div.background{
+      background-color:rgba(230, 244, 250,0.1) ;
+      width: 70%;
+      height: 100%;
+      text-align:center;
+      padding: 25px;
+      margin: auto auto auto auto;
+    }
+    .movies label {
+      font-size: 15px;
+      text-shadow: 1px 1px rgb(189, 197, 199);
+      display: block;
+      text-align:left;
+    }
+    .movies input[type=email],input[type=password],input[type=text],input[type=number] {
+      border-radius: 5px;
+      width: 95%;
+      padding: 2px 2px;
+      margin: 4px 0;
+    }
+    .movies button{
+      border:none;
+      font-size: 20px;
+      padding:5px 10px;
+      margin: 35px 5px;
+    }
+  }

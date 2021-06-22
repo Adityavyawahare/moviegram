@@ -1,0 +1,140 @@
+body.home{
+    background: url("../images/home.jpg") no-repeat fixed;
+    background-size: cover;
+  }
+  .flex-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .home div.background{
+    background-color:rgba(11, 6, 46, 0.4);
+    width: 50%;
+    text-align:center;
+    padding: 25px;
+    margin: auto auto auto auto;
+    font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  .title{
+    font-size: 120px;
+    font-family: "Staatliches",sans-serif;
+    color: rgb(235, 244, 252);
+    text-shadow: 5px 5px black ;
+  }
+  
+  .welcome{
+    font-size: 50px;
+    font-family: "Staatliches",sans-serif;
+    color: beige;
+    text-shadow: 5px 5px black ;
+  }
+  
+  .home label{
+    font-size: 30px;
+    color:beige;
+    text-shadow: 2px 2px black;
+  }
+  
+  .home input[type=email],input[type=password] {
+    width: 50%;
+    padding: 12px 18px;
+    margin: 8px 0;
+    background-color: rgba(222, 251, 255,0.4);
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    display: inline-block;
+    color: rgb(247, 254, 255);
+    font-size: large;
+  }
+  .home input[type=email]:focus,input[type=password]:focus {
+    border: solid 1px black;
+  }
+  ::-webkit-input-placeholder{
+    color: rgb(209, 235, 240);
+    font-size: large;
+  }
+  
+  .home button{
+    border:none;
+    font-size: 20px;
+    color: rgb(66,69,86);
+    padding:5px 10px;
+    margin: 5px;
+    background: rgba(255,255,255,0.7) ;
+    border-radius: 10px;
+    opacity:0.8;
+    cursor: pointer;
+  }
+  
+  .home button:hover{
+    background: rgba(255,255,255,1.0) ;
+  }
+  
+  .home a{
+    background: rgba(6, 78, 92,0.3);
+    border-radius: 10px;
+    color: rgb(38, 175, 201);
+    text-decoration: none;
+  }
+  .home a:hover{
+    background: rgba(6, 78, 92,0.8);
+  }
+  .home a:active{
+    background: rgba(6, 78, 92,0.9);
+  }
+  .home a:visited{
+    background: rgba(6, 78, 92,0.7);
+    color:black;
+  }
+  
+  .home .form{
+    border:none;
+    border-bottom: 3px solid #ebebeb;
+    color: white;
+  }
+  .footer{
+    margin-top: 35px;
+    background-color: #0A3140;
+    height:8vw;
+    padding:50px;
+}
+.footer p{
+  padding: 50px;
+  height:40%;
+  text-align: center;
+  color: #00B7FF;
+  font-family: 'Oswald', sans-serif;
+  font-size: 150%;
+}
+  
+  @media screen and (max-width: 600px) {
+    .title {
+      font-size: 60px;
+    }
+    .welcome{
+      font-size: 30px;
+    }
+    .home label {
+      display: none;
+    }
+    .home input[type=email],input[type=password] {
+      width: 90%;
+      padding: 2px 2px;
+      margin: 4px 0;
+    }
+    .home button{
+      border:none;
+      font-size: 15px;
+      padding:5px 10px;
+      margin: 5px;
+    }
+    .home a{
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 20px;
+    }
+  }
